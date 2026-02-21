@@ -56,6 +56,7 @@
             text-transform: uppercase;
             font-size: 0.9rem;
             transition: 0.3s;
+            position: relative;
         }
         nav ul li a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
@@ -96,7 +97,7 @@
             display: flex;
             width: 300%;
             height: 100%;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .carousel-item {
             width: 100%;
@@ -118,6 +119,25 @@
         }
         .prev { left: 0; border-radius: 0 5px 5px 0; }
         .next { right: 0; border-radius: 5px 0 0 5px; }
+
+        /* --- VIDEO CONTAINER --- */
+        .video-wrapper {
+            margin-top: 30px;
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
         /* --- ESTILOS BOLÃO & RECORDES --- */
         .campeoes-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
@@ -143,7 +163,7 @@
 
         .rank-2025 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
@@ -156,9 +176,32 @@
         }
         .rank-item:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
 
+        /* --- ELENCO --- */
+        .grid-elenco {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+        }
+        .player-tag { 
+            background: var(--palmeiras-light); 
+            padding: 12px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
         /* --- OUTROS --- */
-        .player-tag { background: var(--palmeiras-light); padding: 10px 20px; border-radius: 8px; font-weight: bold; display: inline-block; margin: 5px; }
         .music-player { position: fixed; bottom: 20px; right: 20px; background: var(--palmeiras-main); padding: 10px; border-radius: 50px; display: flex; align-items: center; border: 2px solid var(--gold); z-index: 1001; }
+        
+        input[type="number"]::-webkit-inner-spin-button { display: none; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            nav ul li { margin: 0 10px; }
+            .container { padding: 20px 5%; }
+            h2 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -172,7 +215,7 @@
             <li><a href="#" onclick="nav('elenco')">Elenco</a></li>
             <li><a href="#" onclick="nav('bolao')">Bolão</a></li>
             <li><a href="#" onclick="nav('quiz')">Quiz</a></li>
-            <li><a href="#" onclick="nav('secret')">Área Secreta</a></li>
+            <li><a href="#" onclick="nav('secret')">Restrito</a></li>
         </ul>
     </nav>
 </header>
@@ -189,14 +232,25 @@
             <button class="carousel-control prev" onclick="changeSlide(-1)">❮</button>
             <button class="carousel-control next" onclick="changeSlide(1)">❯</button>
         </div>
+
         <div class="glass-card">
             <h2>AVANTI PALESTRA!</h2>
             <p>Seja Bem-Vindo ao portal oficial da Fúria Alviverde. Fundada em 12 de dezembro de 2021, grupo de WhatsApp criado para reunir torcedores apaixonados pela Sociedade Esportiva Palmeiras, fortalecendo a união da torcida, compartilhando notícias, organizando resenhas em dias de jogo e celebrando cada vitória juntos. Administradores: Sep Day Jailson e Adriano Souza. Aqui a zoeira é liberada, mas o respeito é obrigatório!</p>
+            
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/HzVnZovewtw?autoplay=1&mute=1&loop=1&playlist=HzVnZovewtw&controls=0&modestbranding=1" 
+                    title="Vídeo Fúria Alviverde" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </section>
 
     <section id="bolao">
-        <h2>Campeões</h2>
+        <h2>Campeões do Bolão</h2>
         <div class="glass-card">
             <table class="campeoes-table">
                 <tr><th>Posição</th><th>Palmeirense</th></tr>
@@ -221,7 +275,7 @@
 
             <div style="margin-top: 50px;">
                 <h3>🔥 2025: O ANO MAIS DISPUTADO</h3>
-                <p style="margin-bottom: 15px; opacity: 0.8;">Confira o TOP 5 histórico daquela temporada:</p>
+                <p style="margin-bottom: 15px; opacity: 0.8;">TOP 5 Histórico da temporada:</p>
                 <div class="rank-2025">
                     <div class="rank-item"><strong>1º</strong> André Luis <br><span style="color:var(--gold)">53 pontos</span></div>
                     <div class="rank-item"><strong>2º</strong> SEP Day <br><span style="color:var(--gold)">51 pontos</span></div>
@@ -236,19 +290,24 @@
     <section id="historia">
         <div class="glass-card">
             <h2>Nossa Eterna Glória</h2>
-            <p>Desde 1914 construindo a história mais vitoriosa do Brasil. Da Arrancada Heroica ao Tri da América.</p>
+            <p>Desde 1914 construindo a história mais vitoriosa do Brasil. Da Arrancada Heroica em 1942, onde o Palestra morreu líder e o Palmeiras nasceu campeão, até a conquista do Tri da América. O Palmeiras não é apenas um time, é uma religião alviverde.</p>
         </div>
     </section>
 
     <section id="elenco">
         <h2>Guerreiros do Verdão</h2>
-        <div class="grid-elenco">
-            <div class="player-tag">Weverton</div>
-            <div class="player-tag">Gustavo Gómez</div>
-            <div class="player-tag">Aníbal Moreno</div>
-            <div class="player-tag">Raphael Veiga</div>
-            <div class="player-tag">Estêvão</div>
-            <div class="player-tag">Flaco López</div>
+        <div class="glass-card">
+            <div class="grid-elenco">
+                <div class="player-tag">Weverton</div>
+                <div class="player-tag">Gustavo Gómez</div>
+                <div class="player-tag">Murilo</div>
+                <div class="player-tag">Aníbal Moreno</div>
+                <div class="player-tag">Richard Ríos</div>
+                <div class="player-tag">Raphael Veiga</div>
+                <div class="player-tag">Felipe Anderson</div>
+                <div class="player-tag">Estêvão</div>
+                <div class="player-tag">Flaco López</div>
+            </div>
         </div>
     </section>
 
@@ -258,7 +317,6 @@
             <div id="quiz-container">
                 <p id="question-text" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
                 <div id="options" style="display: grid; gap: 10px;"></div>
-                <p id="quiz-feedback" style="margin-top: 15px; font-weight: bold;"></p>
             </div>
         </div>
     </section>
@@ -269,12 +327,12 @@
             <p>Digite o ano em que o Palestra morreu e o Palmeiras nasceu:</p>
             <input type="number" id="pass" style="background:transparent; border:2px solid var(--gold); color:white; padding:10px; margin:20px; border-radius:5px; width: 150px; text-align: center;" placeholder="Ano">
             <br>
-            <button class="player-tag" style="border:none; cursor:pointer;" onclick="unlock()">VALIDAR</button>
+            <button class="player-tag" style="border:none; cursor:pointer; width: 200px;" onclick="unlock()">VALIDAR</button>
         </div>
-        <div id="secret-room" style="display:none; text-align: center;">
+        <div id="secret-room" style="display:none; text-align: center;" class="glass-card">
             <h1 style="color: var(--gold);">BEM-VINDO AO COFRE!</h1>
-            <p>Táticas secretas e arquivos da diretoria liberados.</p>
-            <img src="https://media.giphy.com/media/l2SpUepuM4fXG6bHq/giphy.gif" width="250" style="margin-top:20px; border-radius:10px;">
+            <p>Táticas secretas e arquivos da diretoria liberados para a Fúria.</p>
+            <img src="https://media.giphy.com/media/l2SpUepuM4fXG6bHq/giphy.gif" width="250" style="margin-top:20px; border-radius:10px; border: 2px solid var(--gold);">
         </div>
     </section>
 
@@ -283,22 +341,25 @@
 <div class="music-player">
     <span style="margin-right: 10px;">🎵 Hino</span>
     <audio id="audio" loop><source src="hino.mp3" type="audio/mpeg"></audio>
-    <button onclick="toggleMusic()" style="background:none; border:none; color:white; cursor:pointer; font-size:1.5rem;">▶️</button>
+    <button onclick="toggleMusic()" id="musicBtn" style="background:none; border:none; color:white; cursor:pointer; font-size:1.5rem;">▶️</button>
 </div>
 
 <script>
+    // Navegação
     function nav(id) {
         document.querySelectorAll('section').forEach(s => s.classList.remove('active-section'));
         document.getElementById(id).classList.add('active-section');
+        window.scrollTo(0,0);
         if(id === 'quiz') startQuiz();
     }
 
     // Carrossel
     let currentSlide = 0;
+    const items = 3;
     function changeSlide(direction) {
         const inner = document.getElementById('carouselInner');
-        currentSlide = (currentSlide + direction + 3) % 3;
-        inner.style.transform = `translateX(-${currentSlide * (100/3)}%)`;
+        currentSlide = (currentSlide + direction + items) % items;
+        inner.style.transform = `translateX(-${currentSlide * (100/items)}%)`;
     }
     setInterval(() => changeSlide(1), 5000);
 
@@ -306,8 +367,16 @@
     let playing = false;
     function toggleMusic() {
         const song = document.getElementById('audio');
-        if(!playing) { song.play(); playing = true; } 
-        else { song.pause(); playing = false; }
+        const btn = document.getElementById('musicBtn');
+        if(!playing) { 
+            song.play(); 
+            playing = true; 
+            btn.innerText = "⏸️";
+        } else { 
+            song.pause(); 
+            playing = false; 
+            btn.innerText = "▶️";
+        }
     }
 
     // Área Secreta
@@ -316,14 +385,15 @@
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('secret-room').style.display = 'block';
         } else {
-            alert("Senha incorreta! Dica: 194X");
+            alert("A história não mente! Tente novamente. Dica: 194X");
         }
     }
 
-    // Quiz Simplificado
+    // Quiz
     const questions = [
-        { q: "Qual o ano de fundação?", options: ["1910", "1912", "1914"], correct: 2 },
-        { q: "Quem marcou o gol do bi da Liberta em 2021?", options: ["Deyverson", "Breno Lopes", "Veiga"], correct: 0 }
+        { q: "Qual o ano de fundação do Palestra Italia?", options: ["1910", "1912", "1914"], correct: 2 },
+        { q: "Quem marcou o gol do título da Libertadores 2021?", options: ["Deyverson", "Breno Lopes", "Raphael Veiga"], correct: 0 },
+        { q: "Qual o nome do estádio do Palmeiras?", options: ["Maracanã", "Allianz Parque", "Vila Belmiro"], correct: 1 }
     ];
     let currentQ = 0;
     function startQuiz() {
@@ -332,7 +402,11 @@
     }
     function showQuestion() {
         const q = questions[currentQ];
-        if(!q) { document.getElementById('quiz-container').innerHTML = "<h3>Quiz Concluído!</h3>"; return; }
+        const container = document.getElementById('quiz-container');
+        if(!q) { 
+            container.innerHTML = "<h3 style='color:var(--gold)'>🔥 Quiz Concluído! Você é um verdadeiro Alviverde!</h3><button onclick='startQuiz()' class='player-tag' style='margin-top:20px; border:none; cursor:pointer;'>Reiniciar</button>"; 
+            return; 
+        }
         document.getElementById('question-text').innerText = q.q;
         const opts = document.getElementById('options');
         opts.innerHTML = "";
@@ -341,9 +415,14 @@
             b.innerText = o;
             b.className = "player-tag";
             b.style.width = "100%";
+            b.style.cursor = "pointer";
+            b.style.border = "none";
             b.onclick = () => {
-                if(i === q.correct) alert("Acertou!");
-                else alert("Errou!");
+                if(i === q.correct) {
+                    alert("GOL! Acertou!");
+                } else {
+                    alert("NA TRAVE! Errou.");
+                }
                 currentQ++;
                 showQuestion();
             };
