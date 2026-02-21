@@ -120,6 +120,13 @@
         .prev { left: 0; border-radius: 0 5px 5px 0; }
         .next { right: 0; border-radius: 5px 0 0 5px; }
 
+        /* --- TABELA DE CAMPEÕES --- */
+        .campeoes-table { width: 100%; border-collapse: collapse; }
+        .campeoes-table th { border-bottom: 2px solid var(--gold); padding: 10px; text-align: left; }
+        .campeoes-table td { padding: 20px 10px; font-size: 1.2rem; }
+        .primeiro-lugar { font-weight: bold; }
+        .segundo-lugar { color: var(--gold); font-weight: bold; }
+
         /* --- QUIZ --- */
         .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
         .option-btn {
@@ -131,7 +138,6 @@
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             transition: 0.3s;
-            text-align: left;
         }
         .option-btn:hover:not(:disabled) { background: var(--palmeiras-main); transform: translateX(5px); }
         .correct { color: #00ff88; font-weight: bold; margin-top: 10px; }
@@ -146,20 +152,6 @@
             text-align: center;
             font-weight: bold;
             transition: 0.3s;
-        }
-        .player-tag:hover { transform: scale(1.1); background: var(--white); color: var(--palmeiras-main); }
-
-        /* --- ÁREA SECRETA --- */
-        .lock-input {
-            background: transparent;
-            border: 2px solid var(--gold);
-            color: white;
-            padding: 10px;
-            font-size: 1.2rem;
-            width: 200px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            outline: none;
         }
 
         .music-player { position: fixed; bottom: 20px; right: 20px; background: var(--palmeiras-main); padding: 10px; border-radius: 50px; display: flex; align-items: center; border: 2px solid var(--gold); z-index: 1001; }
@@ -203,7 +195,7 @@
     <section id="historia">
         <div class="glass-card">
             <h2>Nossa Eterna Glória</h2>
-            <p>De 1914 para a eternidade. Nascemos Palestra, crescemos Palmeiras e morremos campeões. O site homenageia as conquistas de 51, a era Parmalat e a Terceira Academia de Abel Ferreira.</p>
+            <p>De 1914 para a eternidade. Nascemos Palestra, crescemos Palmeiras e morremos campeões. Homenagem às conquistas de 51, era Parmalat e Terceira Academia.</p>
         </div>
     </section>
 
@@ -212,8 +204,6 @@
         <div class="grid-elenco">
             <div class="player-tag">Weverton</div>
             <div class="player-tag">Gustavo Gómez</div>
-            <div class="player-tag">Murilo</div>
-            <div class="player-tag">Aníbal Moreno</div>
             <div class="player-tag">Raphael Veiga</div>
             <div class="player-tag">Estêvão</div>
             <div class="player-tag">Flaco López</div>
@@ -224,21 +214,18 @@
     <section id="bolao">
         <h2>Campeões</h2>
         <div class="glass-card">
-            <table style="width: 100%; border-collapse: collapse; text-align: left;">
-                <tr style="border-bottom: 2px solid var(--gold);">
-                    <th style="padding: 10px;">Posição</th>
-                    <th>Palmeirense</th>
-                    <th>Pontos</th>
-                </tr>
+            <table class="campeoes-table">
                 <tr>
-                    <td style="padding: 15px 10px;">🥇 1º</td>
-                    <td><strong>Paulo Daniel</strong></td>
-                    <td>150 pts</td>
+                    <th>Posição</th>
+                    <th>Palmeirense</th>
                 </tr>
-                <tr style="color: var(--gold);">
-                    <td style="padding: 15px 10px;">🥈 2º</td>
-                    <td><strong>André Luis</strong></td>
-                    <td>142 pts</td>
+                <tr class="primeiro-lugar">
+                    <td>🥇 Primeiro Campeão</td>
+                    <td>Paulo Daniel</td>
+                </tr>
+                <tr class="segundo-lugar">
+                    <td>🥈 Segundo Campeão</td>
+                    <td>André Luis</td>
                 </tr>
             </table>
         </div>
@@ -259,13 +246,14 @@
         <div class="glass-card" id="lock-screen">
             <h2>🚨 ACESSO RESTRITO</h2>
             <p>Digite o ano da Arrancada Heroica:</p>
-            <input type="number" id="pass" class="lock-input" placeholder="Ano">
+            <input type="number" id="pass" style="background:transparent; border:2px solid var(--gold); color:white; padding:10px; margin:10px 0; border-radius:5px;" placeholder="Ano">
+            <br>
             <button class="player-tag" style="border:none; cursor:pointer;" onclick="unlock()">VALIDAR</button>
         </div>
         <div id="secret-room" style="display:none; text-align: center;">
-            <h1 style="color: var(--gold); font-size: 2.5rem;">BEM-VINDO AO COFRE!</h1>
-            <p>Prints proibidos e táticas para o bolão!</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M2ZpNHB4eG96eG96eG96eG96eG96eG96eG96eG96JmVwPXYxX2ludGVybmFsX2dpZl9ieV9iYyZjdD1n/l2SpUepuM4fXG6bHq/giphy.gif" width="250" style="margin-top:20px; border-radius:10px;">
+            <h1 style="color: var(--gold);">BEM-VINDO AO COFRE!</h1>
+            <p>Prints proibidos e táticas liberadas!</p>
+            <img src="https://media.giphy.com/media/l2SpUepuM4fXG6bHq/giphy.gif" width="250" style="margin-top:20px; border-radius:10px;">
         </div>
     </section>
 
@@ -280,12 +268,14 @@
 </div>
 
 <script>
+    // Navegação entre seções
     function nav(id) {
         document.querySelectorAll('section').forEach(s => s.classList.remove('active-section'));
         document.getElementById(id).classList.add('active-section');
         if(id === 'quiz') startQuiz();
     }
 
+    // Controle do Carrossel
     let currentSlide = 0;
     function changeSlide(direction) {
         const inner = document.getElementById('carouselInner');
@@ -294,13 +284,14 @@
     }
     setInterval(() => changeSlide(1), 5000);
 
+    // Sistema de Quiz
     const questions = [
-        { q: "Por que o Palestra Italia mudou de nome para Palmeiras em 1942?", options: ["Pressão política na 2ª Guerra Mundial", "Decisão de marketing", "Fusão com outro clube"], correct: 0 },
-        { q: "Quem é o maior artilheiro da história do Palmeiras?", options: ["Ademir da Guia", "Evair", "Heitor"], correct: 2 },
-        { q: "Contra quem o Palmeiras ganhou a 1ª Libertadores?", options: ["River Plate", "Boca Juniors", "Deportivo Cali"], correct: 2 },
-        { q: "Em 1965, o Palmeiras representou a Seleção contra qual país?", options: ["Argentina", "Uruguai", "Alemanha"], correct: 1 },
-        { q: "Quem era o capitão na Libertadores de 1999?", options: ["Marcos", "César Sampaio", "Alex"], correct: 1 },
-        { q: "Em que ano inaugurou o Allianz Parque?", options: ["2014", "2012", "2015"], correct: 0 }
+        { q: "Em que ano o Palestra mudou de nome para Palmeiras?", options: ["1914", "1942", "1951"], correct: 1 },
+        { q: "Quem é o maior artilheiro da história do clube?", options: ["Evair", "Edmundo", "Heitor"], correct: 2 },
+        { q: "Contra quem vencemos a 1ª Libertadores?", options: ["River Plate", "Boca Juniors", "Deportivo Cali"], correct: 2 },
+        { q: "Qual o ano da Arrancada Heroica?", options: ["1942", "1993", "2015"], correct: 0 },
+        { q: "Quem era o goleiro no título de 1999?", options: ["Weverton", "Marcos", "Sérgio"], correct: 1 },
+        { q: "Quantas Copas do Brasil o Verdão tem?", options: ["3", "4", "5"], correct: 1 }
     ];
 
     let currentQ = 0;
@@ -313,11 +304,12 @@
     }
 
     function showQuestion() {
+        const container = document.getElementById('quiz-container');
         const feedback = document.getElementById('quiz-feedback');
         feedback.innerHTML = "";
         
         if(currentQ >= questions.length) {
-            document.getElementById('quiz-container').innerHTML = `<h3>Fim! Você acertou ${score} de 6.</h3><button class="player-tag" onclick="nav('quiz')">Tentar de novo</button>`;
+            container.innerHTML = `<h3>Fim! Você acertou ${score} de 6.</h3><br><button class="player-tag" style="border:none; cursor:pointer;" onclick="location.reload()">Reiniciar Quiz</button>`;
             return;
         }
 
@@ -330,36 +322,34 @@
             const btn = document.createElement('button');
             btn.className = "option-btn";
             btn.innerText = opt;
-            btn.onclick = () => checkAnswer(i);
+            btn.onclick = () => {
+                if(i === q.correct) {
+                    score++;
+                    feedback.innerHTML = "<p class='correct'>Acertou! 🐷</p>";
+                } else {
+                    feedback.innerHTML = `<p class='wrong'>Errou! Era: ${q.options[q.correct]}</p>`;
+                }
+                currentQ++;
+                setTimeout(showQuestion, 1500);
+            };
             optionsDiv.appendChild(btn);
         });
     }
 
-    function checkAnswer(i) {
-        const feedback = document.getElementById('quiz-feedback');
-        if(i === questions[currentQ].correct) {
-            score++;
-            feedback.innerHTML = "<p class='correct'>Acertou! 🐷</p>";
-        } else {
-            feedback.innerHTML = `<p class='wrong'>Errou! A certa era: ${questions[currentQ].options[questions[currentQ].correct]}</p>`;
-        }
-        
-        currentQ++;
-        setTimeout(showQuestion, 2000);
-    }
-
+    // Senha da Área Secreta
     function unlock() {
         if(document.getElementById('pass').value === "1942") {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('secret-room').style.display = 'block';
         } else {
-            alert("Errou! Dica: Morreu Palestra, nasceu Palmeiras.");
+            alert("Senha Incorreta!");
         }
     }
 
+    // Player de Música
     let playing = false;
-    const song = document.getElementById('audio');
     function toggleMusic() {
+        const song = document.getElementById('audio');
         if(!playing) { song.play(); playing = true; } 
         else { song.pause(); playing = false; }
     }
@@ -367,3 +357,4 @@
 
 </body>
 </html>
+        
