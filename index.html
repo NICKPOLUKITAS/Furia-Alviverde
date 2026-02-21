@@ -82,7 +82,7 @@
         h2 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; margin-bottom: 20px; border-left: 8px solid var(--gold); padding-left: 15px; }
         h3 { font-family: 'Oswald', sans-serif; color: var(--gold); margin-bottom: 15px; text-transform: uppercase; }
 
-       /* --- NOVO ESTILO PARA O CARROSSEL --- */
+       /* --- ESTILO ORIGINAL DO CARROSSEL --- */
 .carousel {
     position: relative;
     width: 100%;
@@ -91,12 +91,11 @@
     overflow: hidden;
     margin-bottom: 30px;
     border: 2px solid var(--gold);
-    background: #000; /* Fundo preto para as fotos não esticarem feio */
 }
 
 .carousel-inner {
     display: flex;
-    width: 300%;
+    width: 300%; /* Para 3 fotos */
     height: 100%;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -104,8 +103,7 @@
 .carousel-item {
     width: 100%;
     height: 100%;
-    background-size: contain; /* Foto inteira sem distorcer */
-    background-repeat: no-repeat;
+    background-size: cover; /* Preenche tudo como antes */
     background-position: center;
     position: relative;
 }
@@ -114,34 +112,27 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: linear-gradient(transparent, rgba(0, 77, 44, 0.9));
-    color: var(--white);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
     padding: 15px;
     text-align: center;
     font-family: 'Oswald', sans-serif;
-    font-size: 1.2rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .carousel-control {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.3);
-    color: var(--gold);
+    background: rgba(0,0,0,0.5);
+    color: white;
     border: none;
     padding: 15px;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.5rem;
     z-index: 10;
-    border-radius: 50%;
-    margin: 0 10px;
-    transition: 0.3s;
 }
-
-.carousel-control:hover {
-    background: rgba(0, 100, 55, 0.8);
-}
+.prev { left: 0; border-radius: 0 5px 5px 0; }
+.next { right: 0; border-radius: 5px 0 0 5px; }
 
         /* --- VIDEO --- */
         .video-wrapper {
@@ -336,23 +327,20 @@ section.active-section {
     
     <section id="home" class="active-section">
         <div class="carousel">
-        <div class="carousel-inner" id="carouselInner">
-            <div class="carousel-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97nmw3ToDvGFA3cjpM98PWWKB0DbVVq8xOQ&s');">
-                <div class="carousel-caption">Fúria Alviverde</div>
-            </div>
-            
-            <div class="carousel-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-mTvQljGOTTSK3SzQ2W658A_Pf6d7nNadag&s');">
-                <div class="carousel-caption">Sociedade Esportiva Palmeiras</div>
-            </div>
-            
-            <div class="carousel-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToilrax14eoBWedxFRjRo98leFwY5v7fCWSw&s');">
-                <div class="carousel-caption">Avanti Palestra</div>
-            </div>
+    <div class="carousel-inner" id="carouselInner">
+        <div class="carousel-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97nmw3ToDvGFA3cjpM98PWWKB0DbVVq8xOQ&s');">
+            <div class="carousel-caption">Fúria Alviverde</div>
         </div>
-        
-        <button class="carousel-control prev" onclick="changeSlide(-1)">❮</button>
-        <button class="carousel-control next" onclick="changeSlide(1)">❯</button>
+        <div class="carousel-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-mTvQljGOTTSK3SzQ2W658A_Pf6d7nNadag&s');">
+            <div class="carousel-caption">Palmeiras</div>
+        </div>
+        <div class="carousel-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToilrax14eoBWedxFRjRo98leFwY5v7fCWSw&s');">
+            <div class="carousel-caption">Avanti Palestra</div>
+        </div>
     </div>
+    <button class="carousel-control prev" onclick="changeSlide(-1)">❮</button>
+    <button class="carousel-control next" onclick="changeSlide(1)">❯</button>
+</div>
 
         <div class="glass-card">
             <h2>AVANTI PALESTRA!</h2>
