@@ -537,19 +537,28 @@ section.active-section {
 </div>
 
 <script>
-    // 1. Variáveis Globais (Declaradas apenas uma vez para não travar o site)
+    // 1. Variáveis de Controle (Declaradas apenas uma vez)
     let currentSlide = 0;
     let playing = false;
+    let currentQ = 0;
+    let score = 0;
     const totalSlides = 3;
 
-    // 2. Função de Navegação entre as abas
+    // 2. Função de Navegação (Menu)
     function nav(id) {
+        // Esconde todas as seções
         document.querySelectorAll('section').forEach(s => s.classList.remove('active-section'));
+        
+        // Mostra a seção desejada
         const target = document.getElementById(id);
         if(target) {
             target.classList.add('active-section');
         }
+
+        // Se entrar no quiz, reinicia ele
         if(id === 'quiz') startQuiz();
+        
+        window.scrollTo(0, 0); // Sobe a página ao trocar de aba
     }
 
     // 3. Funções do Carrossel
@@ -560,12 +569,10 @@ section.active-section {
         inner.style.transform = `translateX(-${moveAmount}%)`;
     }
 
-    // Carrossel Automático (5 segundos)
-    setInterval(() => {
-        changeSlide(1);
-    }, 5000);
+    // Passa o carrossel sozinho a cada 5 segundos
+    setInterval(() => changeSlide(1), 5000);
 
-    // 4. Controle da Música (YouTube API)
+    // 4. Controle do Hino (YouTube)
     function toggleYoutubeMusic() {
         const iframe = document.getElementById('video-hino');
         const btn = document.getElementById('music-btn');
@@ -586,50 +593,66 @@ section.active-section {
         }
     }
 
-    // 5. Função de Acesso Restrito
+    // 5. Função de Senha (1942)
     function unlock() {
-        if(document.getElementById('pass').value === "1942") {
+        const pass = document.getElementById('pass').value;
+        if(pass === "1942") {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('secret-room').style.display = 'block';
         } else { 
-            alert("Senha incorreta!"); 
+            alert("Senha incorreta! Pense no ano da Arrancada Heroica."); 
         }
     }
 
-    // 6. Funções do Quiz
+    // 6. Configuração do Quiz (Perguntas e Lógica)
     const questions = [
-        { q: "Qual o ano de fundação?", options: ["1910", "1912", "1914"], correct: 2 },
-        { q: "Quem marcou o gol do Tri da América (2021)?", options: ["Deyverson", "Breno Lopes", "Veiga"], correct: 0 }
+        { 
+            q: "Por que razão o Palestra Italia teve de mudar o seu nome para Palmeiras em 1942?", 
+            options: ["Pressão da torcida", "Devido à 2ª Guerra Mundial", "Decisão da diretoria"], 
+            correct: 1 
+        },
+        { 
+            q: "Quem é o maior marcador de gols (artilheiro) da história do Palmeiras?", 
+            options: ["Ademir da Guia", "Evair", "Heitor"], 
+            correct: 2 
+        },
+        { 
+            q: "Contra que time o Palmeiras conquistou a sua primeira Libertadores (1999)?", 
+            options: ["Deportivo Cali", "River Plate", "Boca Juniors"], 
+            correct: 0 
+        },
+        { 
+            q: "Em 1965, o Palmeiras representou a Seleção Brasileira contra que país?", 
+            options: ["Argentina", "Uruguai", "Alemanha"], 
+            correct: 1 
+        },
+        { 
+            q: "Quem foi o capitão do Palmeiras na conquista da primeira Libertadores em 1999?", 
+            options: ["César Sampaio", "Marcos", "Zinho"], 
+            correct: 0 
+        },
+        { 
+            q: "Em que ano o Palmeiras inaugurou o seu novo estádio, o Allianz Parque?", 
+            options: ["2012", "2013", "2014"], 
+            correct: 2 
+        }
     ];
-    let currentQ = 0;
 
     function startQuiz() { 
         currentQ = 0; 
+        score = 0;
         showQuestion(); 
     }
 
     function showQuestion() {
-        const q = questions[currentQ];
         const container = document.getElementById('quiz-container');
-        if(!q) { 
-            container.innerHTML = "<h3>Parabéns, Porco! Quiz finalizado.</h3>"; 
-            return; 
-        }
-        document.getElementById('question-text').innerText = q.q;
-        const opts = document.getElementById('options');
-        opts.innerHTML = "";
-        q.options.forEach((o, i) => {
-            const b = document.createElement('button');
-            b.innerText = o; 
-            b.className = "player-tag";
-            b.onclick = () => { 
-                currentQ++; 
-                showQuestion(); 
-            };
-            opts.appendChild(b);
-        });
-    }
-</script>
+        const q = questions[currentQ];
 
+        // Se não houver mais perguntas, mostra o resultado final
+        if(!q) { 
+            container.innerHTML = `
+                <div style="text-align:center">
+                    <h3 style="color:var(--gold)">Fim do Desafio Alviverde!</h3>
+                    <p style="font-size:1.5rem; margin:15px 0;">Você acertou ${score} de ${questions.length}</p>
 </body>
 </html>
