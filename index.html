@@ -183,9 +183,16 @@
         /* --- ESTILOS EXCLUSIVOS HARD CRAVADAS --- */
 
 #elenco {
+    #elenco.active-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* Garanta que as outras seções também usem display block quando ativas */
+section.active-section {
+    display: block; 
+}
 }
 
 .cravadas-header-top {
