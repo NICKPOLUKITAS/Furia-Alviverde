@@ -179,6 +179,78 @@
             nav ul li { margin: 5px 10px; }
             .container { padding: 20px 5%; }
         }
+
+        /* --- ESTILOS HARD CRAVADAS --- */
+.cravadas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cravada-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    border-left: 4px solid var(--palmeiras-light);
+}
+
+.gold-border {
+    border-left: 4px solid var(--gold);
+    background: rgba(197, 161, 74, 0.1);
+}
+
+.cravada-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.rank { color: var(--gold); }
+.placar { color: #fff; letter-spacing: 1px; }
+
+.cravadores {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.cravada-list-mini {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.mini-item {
+    font-size: 0.9rem;
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mini-item span { color: var(--gold); font-weight: bold; margin-right: 10px; }
+
+/* BOX DO REI */
+.king-box {
+    margin-top: 30px;
+    background: linear-gradient(90deg, rgba(0,77,44,0.8) 0%, rgba(197,161,74,0.2) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px var(--gold); }
+    to { box-shadow: 0 0 20px var(--gold); }
+}
+
+.king-icon { font-size: 3rem; }
+.king-text h3 { margin-bottom: 5px; border: none; padding: 0; }
     </style>
 </head>
 <body>
@@ -285,11 +357,58 @@
     </section>
 
     <section id="elenco">
-        <h2>Guerreiros do Verdão</h2>
-        <div class="glass-card">
-            <div class="player-tag">Weverton</div><div class="player-tag">Gustavo Gómez</div><div class="player-tag">Raphael Veiga</div>
-            <div class="player-tag">Estêvão</div><div class="player-tag">Flaco López</div><div class="player-tag">Aníbal Moreno</div>
+        <h2>🔥 HARD CRAVADAS 🔥</h2>
+    <div class="glass-card">
+        <p style="text-align: center; margin-bottom: 25px; opacity: 0.9;">
+            Os palpites mais improváveis que entraram para a história da Fúria.
+        </p>
+
+        <div class="cravadas-container">
+            <div class="cravada-item gold-border">
+                <div class="cravada-header">
+                    <span class="rank">🥇 1º Lugar</span>
+                    <span class="placar">Palmeiras 4 x 0 LDU</span>
+                </div>
+                <div class="cravadores">
+                    ✨ César M, Pretta, Gil, Rafael B, Xande, Gilson, José Jorge, Welton Silva, Claclau e Paulo NDS
+                </div>
+            </div>
+
+            <div class="cravada-item">
+                <div class="cravada-header">
+                    <span class="rank">🥈 2º Lugar</span>
+                    <span class="placar">Palmeiras 4 x 1 Internacional</span>
+                </div>
+                <div class="cravadores">✨ Valdemar & Carlos Robério</div>
+            </div>
+
+            <div class="cravada-item">
+                <div class="cravada-header">
+                    <span class="rank">🥉 3º Lugar</span>
+                    <span class="placar">Palmeiras 3 x 1 River Plate</span>
+                </div>
+                <div class="cravadores">✨ Alice Sophia, Maria K, Carlos Robério & André Luis</div>
+            </div>
+
+            <div class="cravada-list-mini">
+                <div class="mini-item"><span>🏅 4º</span> <b>Palmeiras 4x1 Fortaleza:</b> Giba Sep</div>
+                <div class="mini-item"><span>🏅 5º</span> <b>Palmeiras 4x1 Juventude:</b> Alexandre Novaes</div>
+                <div class="mini-item"><span>🏅 6º</span> <b>Palmeiras 3x1 São Paulo:</b> Gilson, Richard, Inácio e Carlos Robério</div>
+                <div class="mini-item"><span>🏅 7º</span> <b>Bolívar 2x3 Palmeiras:</b> Alexandre Novaes</div>
+                <div class="mini-item"><span>🏅 8º</span> <b>Inter 1x3 Palmeiras:</b> Victor S, Carlos Robério e Gabriel Z</div>
+                <div class="mini-item"><span>🏅 9º</span> <b>Ceará 1x3 Palmeiras:</b> André Luis & Maria K</div>
+                <div class="mini-item"><span>🏅 10º</span> <b>Inter Miami 2x2 Palmeiras:</b> Ângelo</div>
+            </div>
         </div>
+
+        <div class="king-box">
+            <div class="king-icon">👑</div>
+            <div class="king-text">
+                <h3>Carlos Robério</h3>
+                <p>Lidera os placares mais difíceis cravados... simplesmente o <b>REI</b> das Hard Cravadas! 💚⚽🔥</p>
+            </div>
+        </div>
+    </div>
     </section>
 
     <section id="quiz">
