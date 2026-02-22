@@ -305,7 +305,67 @@ section.active-section {
     .rank-row { flex-direction: column; gap: 5px; }
     .rank-owner { text-align: left; }
 }
-       
+
+/* --- ESTILO DO RODAPÉ --- */
+        footer {
+            background: rgba(0, 77, 44, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 3px solid var(--gold);
+            padding: 40px 5% 20px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .adms-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .adm-link {
+            text-decoration: none;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .adm-link:hover {
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .insta-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .adm-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .copyright {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            opacity: 0.6;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+        
     </style>
 </head>
 <body>
@@ -521,6 +581,35 @@ section.active-section {
 
 </div>
 
+    <footer>
+    <div class="footer-content">
+        <h3 style="border:none; padding:0; margin-bottom: 10px;">ADMINISTRAÇÃO</h3>
+        <p style="font-size: 0.9rem; opacity: 0.8;">Siga os responsáveis pela Fúria Alviverde no Instagram</p>
+        
+        <div class="adms-container">
+            <a href="https://instagram.com/SEU_USER_AQUI" target="_blank" class="adm-link">
+                <div class="insta-icon">📸</div>
+                <span class="adm-name">JAILSON (SEP DAY)</span>
+            </a>
+
+            <a href="https://instagram.com/SEU_USER_AQUI" target="_blank" class="adm-link">
+                <div class="insta-icon">📸</div>
+                <span class="adm-name">ADRIANO SOUZA</span>
+            </a>
+
+            <a href="https://instagram.com/SEU_USER_AQUI" target="_blank" class="adm-link">
+                <div class="insta-icon">📸</div>
+                <span class="adm-name">ADM 03</span>
+            </a>
+        </div>
+
+        <div class="copyright">
+            <p>© 2021 - 2026 Fúria Alviverde. Todos os direitos reservados.</p>
+            <p>Sociedade Esportiva Palmeiras - O Campeão do Século.</p>
+        </div>
+    </div>
+</footer>
+    
 <div class="music-player">
     <span id="music-status" style="margin-right: 10px; font-size: 0.8rem;">🎵 Hino Off</span>
     
