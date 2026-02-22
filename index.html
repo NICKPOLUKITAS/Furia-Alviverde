@@ -520,6 +520,37 @@ section.active-section {
     text-align: left;
     font-style: italic;
 }
+
+        .champ-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.champ-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+    transition: 0.5s;
+}
+
+.champ-card:hover::after {
+    left: 120%;
+}
+
+        @keyframes goldGlow {
+    0% { text-shadow: 0 0 5px var(--gold); }
+    50% { text-shadow: 0 0 20px var(--gold), 0 0 30px #fff; }
+    100% { text-shadow: 0 0 5px var(--gold); }
+}
+
+.gold-title {
+    animation: goldGlow 3s infinite alternate;
+}
         
     </style>
 </head>
@@ -957,6 +988,27 @@ section.active-section {
 
     // Inicializa as partículas ao carregar a página
     window.onload = createParticles;
+
+    // Efeito de clique com "poeira de estrela"
+document.addEventListener('click', (e) => {
+    const particle = document.createElement('div');
+    particle.style.position = 'fixed';
+    particle.style.left = e.clientX + 'px';
+    particle.style.top = e.clientY + 'px';
+    particle.style.width = '5px';
+    particle.style.height = '5px';
+    particle.style.background = 'var(--gold)';
+    particle.style.borderRadius = '50%';
+    particle.style.pointerEvents = 'none';
+    particle.style.boxShadow = '0 0 10px var(--gold)';
+    document.body.appendChild(particle);
+
+    particle.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+        { transform: `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px) scale(0)`, opacity: 0 }
+    ], { duration: 1000, easing: 'ease-out' }).onfinish = () => particle.remove();
+});
+    
 </script>
 </body>
 </html>
